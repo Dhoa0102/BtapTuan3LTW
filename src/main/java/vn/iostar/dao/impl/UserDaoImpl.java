@@ -1,8 +1,11 @@
 package vn.iostar.dao.impl;
-
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,9 +35,12 @@ public class UserDaoImpl extends DBConnectMySQL implements IUserDao{
 								rs.getInt("id"),
 								rs.getString("username"),
 								rs.getString("password"),
-								rs.getString("email"),
+								rs.getString("images"),
 								rs.getString("fullname"),
-								rs.getString("images")
+								rs.getString("email"),
+								rs.getInt("roleid"),
+								rs.getString("phone"),
+								rs.getDate("createDate")
 						));
 			}
 			return list;
@@ -60,9 +66,12 @@ public class UserDaoImpl extends DBConnectMySQL implements IUserDao{
 								rs.getInt("id"),
 								rs.getString("username"),
 								rs.getString("password"),
-								rs.getString("email"),
+								rs.getString("images"),
 								rs.getString("fullname"),
-								rs.getString("images")
+								rs.getString("email"),
+								rs.getInt("roleid"),
+								rs.getString("phone"),
+								rs.getDate("createDate")
 						);
 			return fUser;
 		}
@@ -76,7 +85,7 @@ public class UserDaoImpl extends DBConnectMySQL implements IUserDao{
 	@Override
 	public void insert(UserModel user) {
 		// TODO Auto-generated method stub
-		String sql = "insert into users (username,email,password,fullname,images) values (?,?,?,?,?)";
+		String sql = "insert into users (username,password,images,fullname,email,roleid,phone,createDate) values (?,?,?,?,?,?,?,?)";
 		
 		try {
 			conn = super.getDatabaseConnection();
@@ -84,27 +93,122 @@ public class UserDaoImpl extends DBConnectMySQL implements IUserDao{
 			ps = conn.prepareStatement(sql);
 			
 			ps.setString(1, user.getUsername());
-			ps.setString(2,  user.getEmail());
-			ps.setString(3,  user.getPassword());
+			ps.setString(2,  user.getPassword());
+			ps.setString(3,  user.getImages());
 			ps.setString(4, user.getFullname());
-			ps.setString(5, user.getImages());
+			ps.setString(5, user.getEmail());
+			ps.setInt(6,user.getRoleid());
+			ps.setString(7, user.getPhone());
+			ps.setDate(8, user.getCreateDate());
 			ps.executeUpdate();
 		}
 		catch (Exception ex){
 			ex.printStackTrace();
 		}
 	}
+
+	@Override
+	public UserModel findByUsername(String username) {
+		// TODO Auto-generated method stub
+				String sql="select * from users where username=?";
+				try {
+					conn=super.getDatabaseConnection();
+					ps=conn.prepareStatement(sql);
+					ps.setString(1, username);
+					rs=ps.executeQuery();
+					rs.next();
+					UserModel fUser= new UserModel(
+										rs.getInt("id"),
+										rs.getString("username"),
+										rs.getString("password"),
+										rs.getString("images"),
+										rs.getString("fullname"),
+										rs.getString("email"),
+										rs.getInt("roleid"),
+										rs.getString("phone"),
+										rs.getDate("createDate")
+								);
+					return fUser;
+				}
+				catch (Exception e)
+				{
+					e.printStackTrace();
+				}
+				return null;
+	}
+
+	@Override
+	public boolean checkExistUsername(String username) {
+		String sql="select * from users where username=?";
+		try {
+			conn=super.getDatabaseConnection();
+			ps=conn.prepareStatement(sql);
+			ps.setString(1, username);
+			rs=ps.executeQuery();
+			if (!rs.next()){
+				return false;
+			}
+			else
+				return true;
+			
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+		return false;
+	}
+	public boolean checkExistEmail(String email) {
+		String sql="select * from users where email=?";
+		try {
+			conn=super.getDatabaseConnection();
+			ps=conn.prepareStatement(sql);
+			ps.setString(1, email);
+			rs=ps.executeQuery();
+			if (!rs.next()){
+				return false;
+			}
+			else
+				return true;
+			
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+		return false;
+	}
+	public boolean checkExistPhone(String phone) {
+		String sql="select * from users where phone=?";
+		try {
+			conn=super.getDatabaseConnection();
+			ps=conn.prepareStatement(sql);
+			ps.setString(1, phone);
+			rs=ps.executeQuery();
+			if (!rs.next()){
+				return false;
+			}
+			else
+				return true;
+			
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+		return false;
+	}
 	public static void main(String[] args) {
 		UserDaoImpl userDao=new UserDaoImpl();
-		userDao.insert(new UserModel(0,"dinhhoa999","hoa856856@gmail.com","password","Nguyen Dinh Hoa","abc"));
+		userDao.insert(new UserModel(0,"dinhhoa999","password","abc","Nguyen Dinh Hoa","hoa856856@gmail.com",2,"0966736337",new Date(System.currentTimeMillis())));
 		List<UserModel> list=userDao.findAll();
 		for(UserModel user :list)
 		{
 			System.out.println(user);
 		}
 		System.out.println();
-		UserModel fUser= userDao.findById(4);
+		UserModel fUser= userDao.findById(1);
 		System.out.println(fUser);
+		System.out.print(userDao.checkExistUsername("DinhHoa"));
 	}
-	
 }
