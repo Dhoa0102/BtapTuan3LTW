@@ -15,7 +15,7 @@ import vn.iostar.services.impl.UserServiceImpl;
 import vn.iostar.utils.Constant;
 
 @SuppressWarnings("serial")
-@WebServlet(urlPatterns = "/login")
+@WebServlet(urlPatterns = {"/login"})
 
 public class LoginController extends HttpServlet {
 	IUserService service = new UserServiceImpl();

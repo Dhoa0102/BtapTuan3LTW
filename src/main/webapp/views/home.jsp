@@ -8,6 +8,8 @@
 </head>
 <body>
   	trang chu user	
- 
+ 	<form action="/ltwebct5/home" method="post">
+		<button type="submit">log out</button>
+	</form>
 </body>
 </html>

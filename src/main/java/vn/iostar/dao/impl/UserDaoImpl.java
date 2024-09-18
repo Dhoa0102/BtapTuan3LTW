@@ -198,17 +198,32 @@ public class UserDaoImpl extends DBConnectMySQL implements IUserDao{
 		}
 		return false;
 	}
+	public void updatePassword(String username,String password)
+	{
+		IUserDao ud = new UserDaoImpl();
+		UserModel u = ud.findByUsername(username);
+		System.out.println(u.getId());
+		String sql="UPDATE users SET password = ? WHERE (id = ?)";
+		try {
+			conn=super.getDatabaseConnection();
+			ps=conn.prepareStatement(sql);
+			ps.setString(1, password);
+			ps.setInt(2, u.getId());
+			ps.executeUpdate();
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
 	public static void main(String[] args) {
 		UserDaoImpl userDao=new UserDaoImpl();
-		userDao.insert(new UserModel(0,"dinhhoa999","password","abc","Nguyen Dinh Hoa","hoa856856@gmail.com",2,"0966736337",new Date(System.currentTimeMillis())));
+		//userDao.insert(new UserModel(0,"dinhhoa999","password","abc","Nguyen Dinh Hoa","hoa856856@gmail.com",2,"0966736337",new Date(System.currentTimeMillis())));
 		List<UserModel> list=userDao.findAll();
 		for(UserModel user :list)
 		{
 			System.out.println(user);
 		}
-		System.out.println();
-		UserModel fUser= userDao.findById(1);
-		System.out.println(fUser);
-		System.out.print(userDao.checkExistUsername("DinhHoa"));
+		userDao.updatePassword("DinhHoa","1233");
 	}
 }
