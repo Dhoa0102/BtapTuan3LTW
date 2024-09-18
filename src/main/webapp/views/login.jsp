@@ -99,8 +99,8 @@ span.psw {
 		</div>
 
 		<div class="container" style="background-color: #f1f1f1">
-			<button type="button" class="cancelbtn">Cancel</button>
-			<span class="psw"><a href="forgotpw.jsp">Forgot password?</a></span>
+			<button type="button" href="index.jsp" class="cancelbtn">Cancel</button>
+			<span class="psw"><a href="forgotpw">Forgot password?</a></span>
 		</div>
 	</form>
 </body>
