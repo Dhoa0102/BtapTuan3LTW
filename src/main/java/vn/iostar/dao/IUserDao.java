@@ -15,4 +15,5 @@ public interface IUserDao {
 	void updatePassword(String username,String password);
 	void updatePhone(int id,String phone);
 	void updateFullname(int id,String fullname);
+	void updateImages(int id,String images);
 }

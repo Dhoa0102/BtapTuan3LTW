@@ -13,4 +13,5 @@ public interface IUserService {
 	boolean updatePassword(String username,String password);
 	boolean updatePhone(int id,String phone);
 	boolean updateFullname(int id,String fullname);
+	boolean updateImages(int id,String images);
 }

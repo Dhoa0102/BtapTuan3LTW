@@ -56,7 +56,7 @@ body {
 }
 </style>
 <body>
-	<form action="myaccount" method="post">
+	<form action="myaccount" method="post" enctype="multipart/form-data">
 	<c:if test="${alert !=null}">
 			<h1 class="alert alert danger">${alert}</h1>
 		</c:if> 
@@ -68,7 +68,9 @@ body {
               <div class="container rounded bg-white mt-5 mb-5">
     <div class="row">
         <div class="col-md-3 border-right">
-            <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"><span class="font-weight-bold">Edogaru</span><span class="text-black-50">edogaru@mail.com.my</span><span> </span></div>
+            <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="${pageContext.request.contextPath}/images/${sessionScope.account.images}">
+            <input type="file" name="multiPartServlet"/>
+            </div>
         </div>
         <div class="col-md-5 border-right">
             <div class="p-3 py-5">
@@ -76,14 +78,14 @@ body {
                     <h4 class="text-right">Profile Settings</h4>
                 </div>
                 <div class="row mt-2">
-                    <div class="col-md-6"><label class="labels">ID</label><input readonly type="text" name="id" class="form-control" placeholder="" value="${sessionScope.account.id}"></div>
+                    <div class="col-md-6"><label class="labels">ID</label><input readonly type="text" name="id" class="form-control" value="${sessionScope.account.id}"></div>
                  </div>
                 <div class="row mt-3">
-                    <div class="col-md-12"><label class="labels">Full Name</label><input type="text" class="form-control" name="fullname" placeholder="" value="${sessionScope.account.fullname}"></div>
-                    <div class="col-md-12"><label class="labels">Username</label><input readonly type="text" class="form-control" name="username" placeholder="" value="${sessionScope.account.username}"></div>
-                    <div class="col-md-12"><label class="labels">Email</label><input readonly type="text" class="form-control" name="email" placeholder="" value="${sessionScope.account.email}"></div>
-                    <div class="col-md-12"><label class="labels">Phone Number</label><input type="text" class="form-control" name="phone" placeholder="" value="${sessionScope.account.phone}"></div>
-                    <div class="col-md-12"><label class="labels">Create date</label><input readonly type="text" class="form-control" name="createDate" placeholder="" value="${sessionScope.account.createDate}"></div>
+                    <div class="col-md-12"><label class="labels">Full Name</label><input type="text" class="form-control" name="fullname"  value="${sessionScope.account.fullname}"></div>
+                    <div class="col-md-12"><label class="labels">Username</label><input readonly type="text" class="form-control" name="username" value="${sessionScope.account.username}"></div>
+                    <div class="col-md-12"><label class="labels">Email</label><input readonly type="text" class="form-control" name="email" value="${sessionScope.account.email}"></div>
+                    <div class="col-md-12"><label class="labels">Phone Number</label><input type="text" class="form-control" name="phone" value="${sessionScope.account.phone}"></div>
+                    <div class="col-md-12"><label class="labels">Create date</label><input readonly type="text" class="form-control" name="createDate" value="${sessionScope.account.createDate}"></div>
                     </div>
                 </br>
                 <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit">Save Profile</button></div>

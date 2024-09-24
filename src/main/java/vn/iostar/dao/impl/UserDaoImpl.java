@@ -235,11 +235,26 @@ public class UserDaoImpl extends DBConnectMySQL implements IUserDao{
 	public void updateFullname(int id, String fullname) {
 		String sql="UPDATE users SET fullname = ? WHERE (id = ?)";
 		try {
-			System.out.println(id);
-			System.out.println(fullname);
 			conn=super.getDatabaseConnection();
 			ps=conn.prepareStatement(sql);
 			ps.setString(1, fullname);
+			ps.setInt(2, id);
+			ps.executeUpdate();
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+	}
+	@Override
+	public void updateImages(int id, String images) {
+		
+		String sql="UPDATE users SET images = ? WHERE (id = ?)";
+		try {
+			conn=super.getDatabaseConnection();
+			ps=conn.prepareStatement(sql);
+			ps.setString(1, images);
 			ps.setInt(2, id);
 			ps.executeUpdate();
 		}
@@ -259,5 +274,6 @@ public class UserDaoImpl extends DBConnectMySQL implements IUserDao{
 		}
 		userDao.updatePassword("DinhHoa","1233");
 	}
+
 
 }

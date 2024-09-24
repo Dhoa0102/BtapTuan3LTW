@@ -78,5 +78,11 @@ public class UserServiceImpl implements IUserService {
 		userDao.updateFullname(id, fullname);
 		return true;
 	}
+
+	@Override
+	public boolean updateImages(int id, String images) {
+		userDao.updateImages(id, images);
+		return true;
+	}
 	
 }
