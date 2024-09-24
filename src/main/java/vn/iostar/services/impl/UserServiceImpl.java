@@ -66,5 +66,17 @@ public class UserServiceImpl implements IUserService {
 		 userDao.updatePassword(username, password);	
 		 return true;
 	}
+
+	@Override
+	public boolean updatePhone(int id, String phone) {
+		userDao.updatePhone(id, phone);
+		return true;
+	}
+
+	@Override
+	public boolean updateFullname(int id, String fullname) {
+		userDao.updateFullname(id, fullname);
+		return true;
+	}
 	
 }

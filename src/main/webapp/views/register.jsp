@@ -8,6 +8,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+</head>
+<body>
 <style>
 body {
   font-family: Arial, Helvetica, sans-serif;
@@ -21,7 +23,6 @@ body {
 /* Add padding to containers */
 .container {
   padding: 16px;
-  background-color: white;
 }
 
 /* Full-width input fields */
@@ -72,8 +73,6 @@ a {
   text-align: center;
 }
 </style>
-</head>
-<body>
 	<form action="register" method="post">
   <div class="container">
     <h1>Register</h1>
@@ -82,13 +81,13 @@ a {
 		<h3 class="alert alert danger">${alert}</h3>
 	</c:if>
     <hr>
-	<label for="username"><b>username</b></label>
+	<label for="username"><b>Username</b></label>
     <input type="text" placeholder="Enter username" name="username" id="username" required>
-    <label for="fullname"><b>fullname</b></label>
+    <label for="fullname"><b>Fullname</b></label>
     <input type="text" placeholder="Enter fullname" name="fullname" id="fullname" required>
     <label for="email"><b>Email</b></label>
     <input type="text" placeholder="Enter Email" name="email" id="email" required>
-    <label for="phone"><b>phone</b></label>
+    <label for="phone"><b>Phone</b></label>
     <input type="text" placeholder="Enter phone" name="phone" id="phone" required>
 
     <label for="psw"><b>Password</b></label>

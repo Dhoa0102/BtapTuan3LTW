@@ -25,6 +25,7 @@ public class WaitingController extends HttpServlet {
 			UserModel u = (UserModel) session.getAttribute("account");
 			req.setAttribute("username", u.getUsername());
 			if (u.getRoleid() == 2) {
+				System.out.println(req.getContextPath());
 				resp.sendRedirect(req.getContextPath() + "/admin/home");
 				return;
 			} else if (u.getRoleid() == 3) {
@@ -46,12 +47,14 @@ public class WaitingController extends HttpServlet {
 							UserModel u = ud.findByUsername(username);
 							req.setAttribute("username", u.getUsername());
 							if (u.getRoleid() == 2) {
+								System.out.println(req.getContextPath());
 								resp.sendRedirect(req.getContextPath() + "/admin/home");
 								return;
 							} else if (u.getRoleid() == 3) {
 								resp.sendRedirect(req.getContextPath() + "/manager/home");
 								return;
 							} else {
+
 								resp.sendRedirect(req.getContextPath() + "/home");
 								return;
 							}

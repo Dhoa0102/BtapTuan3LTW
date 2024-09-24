@@ -6,7 +6,9 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<body>
-	trang chu admin
+<body>	
+	<form action="/ltwebct5/home" method="post">
+		<button type="submit">log out</button>
+	</form>
 </body>
 </html>

@@ -34,6 +34,11 @@
 			<artifactId>HelloWorld</artifactId>
 			<version>0.0.1</version>
 		</dependency>
+		<dependency>
+        <groupId>org.sitemesh</groupId>
+        <artifactId>sitemesh</artifactId>
+        <version>3.2.1</version>
+    </dependency>
 		<!--
 		https://mvnrepository.com/artifact/jakarta.servlet.jsp.jstl/jakarta.servlet.jsp.jstl-api -->
 		<dependency>

@@ -35,15 +35,9 @@ public class ForgotPwController extends HttpServlet {
 		boolean isSuccess = service.updatePassword(username, password);
 		if (isSuccess) {
 			System.out.println("doi mk thanh cong");
-			// SendMail sm = new SendMail();
-			// sm.sendMail(email, "Shopping.iotstar.vn", "Welcome to Shopping. Please Login
-			// to use service. Thanks !");
 			req.setAttribute("alert", alertMsg);
 			resp.sendRedirect(req.getContextPath() + "/login");
 		} else {
-			System.out.println(username);
-			System.out.println(password);
-			System.out.println("doi mk ko thanh cong");
 			alertMsg = "System error!";
 			req.setAttribute("alert", alertMsg);
 			req.getRequestDispatcher(Constant.FORGOTPW).forward(req, resp);

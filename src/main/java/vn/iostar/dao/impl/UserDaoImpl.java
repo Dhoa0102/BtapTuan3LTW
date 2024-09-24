@@ -202,7 +202,6 @@ public class UserDaoImpl extends DBConnectMySQL implements IUserDao{
 	{
 		IUserDao ud = new UserDaoImpl();
 		UserModel u = ud.findByUsername(username);
-		System.out.println(u.getId());
 		String sql="UPDATE users SET password = ? WHERE (id = ?)";
 		try {
 			conn=super.getDatabaseConnection();
@@ -216,6 +215,40 @@ public class UserDaoImpl extends DBConnectMySQL implements IUserDao{
 			e.printStackTrace();
 		}
 	}
+	@Override
+	public void updatePhone(int id, String phone) {
+		String sql="UPDATE users SET phone = ? WHERE (id = ?)";
+		try {
+			conn=super.getDatabaseConnection();
+			ps=conn.prepareStatement(sql);
+			ps.setString(1, phone);
+			ps.setInt(2, id);
+			ps.executeUpdate();
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
+	
+	@Override
+	public void updateFullname(int id, String fullname) {
+		String sql="UPDATE users SET fullname = ? WHERE (id = ?)";
+		try {
+			System.out.println(id);
+			System.out.println(fullname);
+			conn=super.getDatabaseConnection();
+			ps=conn.prepareStatement(sql);
+			ps.setString(1, fullname);
+			ps.setInt(2, id);
+			ps.executeUpdate();
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+	}
 	public static void main(String[] args) {
 		UserDaoImpl userDao=new UserDaoImpl();
 		//userDao.insert(new UserModel(0,"dinhhoa999","password","abc","Nguyen Dinh Hoa","hoa856856@gmail.com",2,"0966736337",new Date(System.currentTimeMillis())));
@@ -226,4 +259,5 @@ public class UserDaoImpl extends DBConnectMySQL implements IUserDao{
 		}
 		userDao.updatePassword("DinhHoa","1233");
 	}
+
 }

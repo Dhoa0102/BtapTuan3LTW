@@ -7,7 +7,5 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1 class="login"><a href="login">Login</a></h1>
-	<h1 class="register"><a href="register">register</a></h1>
 </body>
 </html>
