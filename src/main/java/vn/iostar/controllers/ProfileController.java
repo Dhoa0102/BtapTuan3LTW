@@ -54,20 +54,20 @@ public class ProfileController extends HttpServlet {
 		
 // Load anh
 		String uploadPath = File.separator + Constant.UPLOAD_DIRECTORY; 
-		boolean isSuccess3 = false;
 		File uploadDir = new File(uploadPath);
 		if (!uploadDir.exists())
 			 uploadDir.mkdir();
 		try {
 			 String fileName = "";
 			for (Part part : req.getParts()) {
-				 fileName = getFileName(part);
-				 System.out.println("ten file"+fileName);
-				 if(!fileName.equals("default.file")) {
-					 System.out.println(fileName);
-					 isSuccess3 = service.updateImages(id, fileName);
-				 }
-				 part.write(uploadPath + File.separator + fileName);
+				if(part.getSize()>0) {
+					fileName = getFileName(part);
+					if(!fileName.equals(Constant.DEFAULT_FILENAME)) {
+						service.updateImages(id, fileName);
+					}
+					part.write(uploadPath + File.separator + fileName);
+					
+				}
 			}
 			 req.setAttribute("message", "File " + fileName + " has uploaded successfully!");
 		 }
@@ -82,7 +82,7 @@ public class ProfileController extends HttpServlet {
 		String alertMsg = "";
 		boolean isSuccess1 = service.updateFullname(id, fullName);
 		boolean isSuccess2 = service.updatePhone(id, phone);
-		if (isSuccess1 && isSuccess2&&isSuccess3) {
+		if (isSuccess1 && isSuccess2) {
 			System.out.println("doi thong tin thanh cong");
 			alertMsg = "Đổi thông tin thành công";
 			req.setAttribute("alert", alertMsg);
